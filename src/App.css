@@ -1,42 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* App.css */
+.app {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevents scrollbars from appearing */
+  height: 100vh;
+  width: 100vw;
+  position: relative; /* Needed for butterfly positioning */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.full-screen-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; Ensures video covers the full screen while maintaining aspect ratio */
+  z-index: 1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.butterfly {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  transition: all 0.5s ease; /* Smooth transition when the butterfly appears */
+  z-index: 3;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* grid  */
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Place above the video */
+  pointer-events: none; /* Allows click events to pass through the grid overlay */
 }
 
-.card {
-  padding: 2em;
+.grid-line {
+  position: absolute;
+  background-color: red; /* Set grid line color to red */
+  opacity: 0.7; /* Slight transparency */
 }
 
-.read-the-docs {
-  color: #888;
+/* Vertical lines */
+.vertical {
+  width: 2px;
+  height: 100%;
+}
+
+/* Horizontal lines */
+.horizontal {
+  height: 2px;
+  width: 100%;
+}
+
+
+/* RESULTS */
+
+/* Results page styles */
+.results-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  gap: 5px;
+  width: 50vmin; /* Ensures the grid is square and responsive */
+  height: 50vmin; /* Ensures the grid is square and responsive */
+}
+
+.results-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  color: black;
+  background-color: rgba(0, 0, 0, 0.1); /* Light color for no detections */
+  border: 1px solid black;
 }
