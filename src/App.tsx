@@ -138,18 +138,18 @@ const App: React.FC = () => {
     <div className="app">
       {!showResults ? (
         <>
-          {/* <video ref={videoRef} className="full-screen-video" controls>
+          <video ref={videoRef} className="full-screen-video" controls>
             <source src="/video.mp4" type="video/mp4" />
             Your browser does not support the video tag.
 
-            https://drive.google.com/file/d/11D60URX5wxW2Jo4WkRNVK9HMzjHsPl0n/view?usp=sharing
+            {/* https://drive.google.com/file/d/11D60URX5wxW2Jo4WkRNVK9HMzjHsPl0n/view?usp=sharing
 
-            11D60URX5wxW2Jo4WkRNVK9HMzjHsPl0n
-          </video> */}
-          <video ref={videoRef} className="full-screen-video" controls>
+            11D60URX5wxW2Jo4WkRNVK9HMzjHsPl0n */}
+          </video>
+          {/* <video ref={videoRef} className="full-screen-video" preload="auto" controls>
             <source src="https://drive.google.com/uc?id=11D60URX5wxW2Jo4WkRNVK9HMzjHsPl0n&export=download" type="video/mp4" />
             Your browser does not support the video tag.
-          </video>
+          </video> */}
           <div className="grid-overlay">
             {/* Add grid lines dynamically */}
             {[...Array(GRID_SIZE)].map((_, i) => (
