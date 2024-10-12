@@ -113,7 +113,7 @@ const App: React.FC = () => {
   const renderResultsPage = () => {
     return (
       <div className="results-page">
-        <h2>Results</h2>
+        <h2 className="results-title">Results</h2>
         <div className="results-grid">
           {detectionCounts.map((row, rowIndex) =>
             row.map((count, colIndex) => (

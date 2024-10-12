@@ -86,3 +86,6 @@
   background-color: rgba(0, 0, 0, 0.1); /* Light color for no detections */
   border: 1px solid black;
 }
+.results-title {
+  color: black;
+}
