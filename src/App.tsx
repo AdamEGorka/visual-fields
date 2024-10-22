@@ -5,7 +5,27 @@ import './App.css'; // Import the CSS file
 
 
 const GRID_SIZE = 10; 
+const CENTER = Math.floor(GRID_SIZE / 2);
+const RADIUS = GRID_SIZE / 2; // Adjust this to control the size of the circle
 
+
+const validCircularCoordinates = Array.from({ length: GRID_SIZE }, (_, row) =>
+  Array.from({ length: GRID_SIZE }, (_, col) => {
+    const distanceFromCenter = Math.sqrt((row - CENTER) ** 2 + (col - CENTER) ** 2);
+    return distanceFromCenter <= RADIUS ? { row, col } : null;
+  })
+)
+  .flat()
+  .filter((coord): coord is { row: number; col: number } => coord !== null);
+
+  
+
+// Function to pick a random valid coordinate within the circular region
+const randomCircularCoordinate = () => {
+  return validCircularCoordinates[
+    Math.floor(Math.random() * validCircularCoordinates.length)
+  ];
+};
 
 const App: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -20,14 +40,10 @@ const App: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const butterflyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const randomGridCoordinate = () => {
-    const row = Math.floor(Math.random() * GRID_SIZE);
-    const col = Math.floor(Math.random() * GRID_SIZE);
-    return { row, col };
-  };
+  const randomGridCoordinate = randomCircularCoordinate;
 
   const updateButterflyPosition = () => {
-    const { row, col } = randomGridCoordinate();
+    const { row, col } = randomCircularCoordinate();
     setCurrentGridPos({ row, col });
 
     // Calculate actual position on the screen based on grid size
@@ -109,25 +125,48 @@ const App: React.FC = () => {
     }
   }, []);
 
-
   const renderResultsPage = () => {
+    // Ensure shapeMask dimensions match detectionCounts dimensions
+    const shapeMask = [
+      [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+      [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+      [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+    ];
+  
+  
     return (
       <div className="results-page">
         <h2 className="results-title">Results</h2>
         <div className="results-grid">
           {detectionCounts.map((row, rowIndex) =>
-            row.map((count, colIndex) => (
-              <div
-                key={`cell-${rowIndex}-${colIndex}`}
-                className="results-cell"
-                style={{
-                  backgroundColor: `rgba(0, 0, 0, ${Math.min(count / 10, 1)})`, // Darker color for more detections, max opacity is 1
-                  border: '1px solid black',
-                }}
-              >
-                {count > 0 ? count : ''}
-              </div>
-            ))
+            row.map((count, colIndex) => {
+              // Ensure indices are within the shapeMask bounds
+              const isInMaskBounds =
+                rowIndex < shapeMask.length && colIndex < shapeMask[0].length;
+              const isValidCoordinate =
+                isInMaskBounds && shapeMask[rowIndex][colIndex] === 1;
+  
+              return (
+                <div
+                  key={`cell-${rowIndex}-${colIndex}`}
+                  className="results-cell"
+                  style={{
+                    visibility: isValidCoordinate ? 'visible' : 'hidden',
+                    backgroundColor: isValidCoordinate
+                      ? `rgba(0, 0, 0, ${Math.min(count / 10, 1)})`
+                      : 'transparent',
+                    border: isValidCoordinate ? '1px solid black' : 'none',
+                  }}
+                >
+                  {isValidCoordinate && count > 0 ? count : ''}
+                </div>
+              );
+            })
           )}
         </div>
       </div>
