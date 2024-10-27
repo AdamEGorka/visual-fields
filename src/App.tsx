@@ -178,7 +178,7 @@ const App: React.FC = () => {
       {!showResults ? (
         <>
           <video ref={videoRef} className="full-screen-video" controls>
-            <source src="/video.mp4" type="video/mp4" />
+            <source src="/output.mp4" type="video/mp4" />
             Your browser does not support the video tag.
 
             {/* https://drive.google.com/file/d/11D60URX5wxW2Jo4WkRNVK9HMzjHsPl0n/view?usp=sharing
