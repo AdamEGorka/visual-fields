@@ -40,7 +40,6 @@ const App: React.FC = () => {
   const [showResults, setShowResults] = useState(false);
   const butterflyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const randomGridCoordinate = randomCircularCoordinate;
 
   const updateButterflyPosition = () => {
     const { row, col } = randomCircularCoordinate();
