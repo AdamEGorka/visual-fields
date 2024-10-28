@@ -63,10 +63,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center;
+  \ */
+  justify-content: space-between; /* More space between elements */
   height: 100vh;
   background-color: #f0f0f0;
   position: relative;
+  padding-top: 20px; /* Add some padding at the top */
 }
 
 .results-grid {
@@ -112,4 +115,58 @@
 }
 .results-title {
   color: black;
+}
+
+
+
+.color-legend {
+  margin-top: 30px; /* Increase margin for better spacing */
+  margin-bottom: 100px;
+  text-align: center;
+  width: min(50vmin, 50vw); /* Ensure it aligns with the grid's width */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color:black; 
+}
+
+.legend-scale {
+  margin-bottom: 10px; /* Add space between the color bar and labels */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.legend-color {
+  width: 50px;
+  height: 20px;
+}
+
+.legend-color.low {
+  background-color: rgba(0, 0, 0, 0.8); /* Blue */
+}
+
+.legend-color.mid {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.8));
+}
+
+.legend-color.high {
+  background-color: rgba(255, 255, 255, 0.8); /* Red */
+}
+
+.legend-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: black;
+}
+
+.legend-labels span {
+  width: 100px;
 }

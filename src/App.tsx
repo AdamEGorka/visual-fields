@@ -2,12 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css'; // Import the CSS file
 
-
-
-const GRID_SIZE = 10; 
-const CENTER = Math.floor(GRID_SIZE / 2);
-const RADIUS = GRID_SIZE / 2; // Adjust this to control the size of the circle
-
 const GRID_ROWS = 8;
 const GRID_COLS = 10;
 
@@ -206,7 +200,7 @@ const App: React.FC = () => {
                     border: isValidCoordinate ? '1px solid black' : 'none',
                   }}
                 >
-                  {isValidCoordinate && count > 0 ? count : ''}
+                  {/* {isValidCoordinate && count > 0 ? count : ''} */}
                 </div>
               );
             })
@@ -214,7 +208,21 @@ const App: React.FC = () => {
          {/* Axes divs */}
         <div className="horizontal-axis"></div>
         <div className="vertical-axis"></div>
+        
         </div>
+        {/* Color legend */}
+      <div className="color-legend">
+        <div className="legend-title">Detection Counts</div>
+        <div className="legend-scale">
+          <div className="legend-color low"></div>
+          <div className="legend-color mid"></div>
+          <div className="legend-color high"></div>
+        </div>
+        <div className="legend-labels">
+          <span>Low</span>
+          <span>High</span>
+        </div>
+      </div>
       </div>
     );
   };
@@ -223,7 +231,11 @@ const App: React.FC = () => {
     <div className="app">
       {!showResults ? (
         <>
-          <video ref={videoRef} className="full-screen-video" controls>
+          <video
+            ref={videoRef}
+            className="full-screen-video"
+            controls
+          >
             <source src="/output.mp4" type="video/mp4" />
             Your browser does not support the video tag.
 
@@ -237,12 +249,12 @@ const App: React.FC = () => {
           </video> */}
           <div className="grid-overlay">
             {/* Add grid lines dynamically */}
-            {[...Array(GRID_COLS)].map((_, i) => (
+            {/* {[...Array(GRID_COLS)].map((_, i) => (
               <div key={`vertical-${i}`} className="grid-line vertical" style={{ left: `${(i / GRID_COLS) * 100}%` }}></div>
             ))}
             {[...Array(GRID_ROWS)].map((_, i) => (
               <div key={`horizontal-${i}`} className="grid-line horizontal" style={{ top: `${(i / GRID_ROWS) * 100}%` }}></div>
-            ))}
+            ))} */}
           </div>
           {showButterfly && (
             <img
