@@ -66,15 +66,39 @@
   justify-content: center;
   height: 100vh;
   background-color: #f0f0f0;
+  position: relative;
 }
 
 .results-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   gap: 5px;
-  width: 50vmin; /* Ensures the grid is square and responsive */
-  height: 50vmin; /* Ensures the grid is square and responsive */
+  width: min(50vmin, 50vw); /* Ensures the grid is square but responsive */
+  height: min(45vmin, 45vw); /* Ensures the grid is square but responsive */
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+.horizontal-axis {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  transform: translateY(-50%);
+}
+
+.vertical-axis {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: black;
+  transform: translateX(-50%);
 }
 
 .results-cell {
